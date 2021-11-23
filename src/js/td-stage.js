@@ -296,6 +296,7 @@ _TD.a.push(function (TD) {
 		gameover: function () {
 			if (this.is_gameover) return;
 			this.pause();
+			TD.postScore();
 			this.is_gameover = true;
 		},
 		step: function () {

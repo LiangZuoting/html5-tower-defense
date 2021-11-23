@@ -22,6 +22,9 @@ font-weight: bold;
 font-family: Verdana, "Times New Roman", serif;
 letter-spacing: 0.12em;
 }
+.title {
+    text-align: center;
+}
 
 #wrapper {
 margin: 0 auto;
@@ -30,9 +33,15 @@ margin: 0 auto;
 padding: 8px 24px 60px 24px;
 background: #E0F4FC;
 }
+#td-rank-wrapper {
+    display: inline-block;
+    margin-left: 20px;
+    vertical-align: top;
+}
 #td-board {
 display: none;
 font-size: 16px;
+text-align: center;
 }
 #td-board canvas#td-canvas {
 position: relative;

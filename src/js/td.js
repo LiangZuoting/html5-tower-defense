@@ -41,6 +41,7 @@ var _TD = {
 			init: function (ob_board/*, ob_info*/) {
 				this.obj_board = TD.lang.$e(ob_board);
 				this.canvas = this.obj_board.getElementsByTagName("canvas")[0];
+				this.rank = document.getElementById('rank');
 				//this.obj_info = TD.lang.$e(ob_info);
 				if (!this.canvas.getContext) return; // 不支持 canvas
 				this.ctx = this.canvas.getContext("2d");
@@ -50,6 +51,7 @@ var _TD = {
 				this.fps = 0;
 
 				this.start();
+				this.getRank();
 			},
 
 			/**
@@ -164,6 +166,38 @@ var _TD = {
 				this._st = setTimeout(function () {
 					_this.step();
 				}, this.step_time);
+			},
+
+			getRank: function() {
+                fetch(window.location.origin + '/users/rank/' + window.location.pathname).then(response => response.json()).then(json => {
+                    this.updateRank(json);
+                });
+			},
+			
+			postScore: function() {
+				const token = localStorage.getItem('token');
+				if (token) {
+					fetch('/users/rank', {
+						headers: {
+							'content-type': 'application/json'
+						},
+						method: 'POST',
+						body: JSON.stringify({token: token, game: '/' + window.location.pathname, score: TD.score})
+					}).then(response => response.json()).then(json=>{
+						this.updateRank(json);
+					});
+				}
+			},
+
+			updateRank: function(json) {
+                while (this.rank.children.length > 0) {
+                    this.rank.removeChild(this.rank.children[0]);
+                }
+                json.rank.map(data => {
+                    let li = document.createElement('li');
+                    li.innerHTML = data.nickname + "：" + data.score;
+                    this.rank.appendChild(li);
+                });
 			},
 
 			/**
