@@ -41,7 +41,7 @@ var _TD = {
 			init: function (ob_board/*, ob_info*/) {
 				this.obj_board = TD.lang.$e(ob_board);
 				this.canvas = this.obj_board.getElementsByTagName("canvas")[0];
-				this.rank = document.getElementById('rank');
+				this.rank = document.getElementById('td-rank');
 				//this.obj_info = TD.lang.$e(ob_info);
 				if (!this.canvas.getContext) return; // 不支持 canvas
 				this.ctx = this.canvas.getContext("2d");
