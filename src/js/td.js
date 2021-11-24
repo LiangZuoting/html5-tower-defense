@@ -182,7 +182,7 @@ var _TD = {
 							'content-type': 'application/json'
 						},
 						method: 'POST',
-						body: JSON.stringify({token: token, game: '/' + window.location.pathname, score: TD.score})
+						body: JSON.stringify({token: token, game: window.location.pathname, score: TD.score})
 					}).then(response => response.json()).then(json=>{
 						this.updateRank(json);
 					});
